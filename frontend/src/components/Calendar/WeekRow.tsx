@@ -1,4 +1,4 @@
-import { Td, NewRowInput, NewRowTd, Owner, NewRowTr } from "./Week.styles"
+import { Td, NewRowInput, NewRowTd, Owner, NewRowTr } from "./Calendar.styles"
 import { WeekRowProps } from "utils/models/props"
 import DayCard from "./DayCard"
 import React, { useEffect, useRef, useState } from "react"

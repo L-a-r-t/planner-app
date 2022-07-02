@@ -1,6 +1,6 @@
 import { CardWrapper } from 'components/Wrappers'
 import { useEffect, useState } from 'react'
-import { Table, Th } from './Week.styles'
+import { Table, Th } from './Calendar.styles'
 import { WeekRow, NewWeekRow } from './WeekRow'
 import { getFirstDayOfWeek } from 'utils/logic'
 import { Agenda } from 'utils/models'
