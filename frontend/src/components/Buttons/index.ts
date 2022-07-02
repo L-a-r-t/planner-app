@@ -32,4 +32,19 @@ export const BlankButton = styled.button`
     }
 `
 
+export const RoundButton = styled.button<RoundButtonProps>`
+    border: none;
+    background-color: ${props => props.backgroundColor};
+    color: white;
+    border-radius: 1rem;
+    height: 1.5rem;
+    &:hover {
+        cursor: pointer;
+    }
+`
+
 export default Button
+
+interface RoundButtonProps {
+    backgroundColor: string
+}

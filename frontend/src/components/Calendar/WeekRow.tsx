@@ -7,7 +7,7 @@ import { RootState } from "redux/store";
 import { add, highlight, update, push, pushhighlight, resethighlight, erase } from 'redux/reducers/agendas'
 import { showCorner } from "redux/reducers/modal";
 import { useAPI } from "utils/hooks";
-import { BlankButton } from "components/Buttons";
+import { BlankButton, RoundButton } from "components/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -87,20 +87,20 @@ export function WeekRow({agenda, index}: WeekRowProps) {
                 <div
                     style={{display: "flex", justifyContent: "space-around"}}
                 >
-                    <BlankButton
+                    <RoundButton
                         onClick={handleSubmit}
                         aria-label="Save"
-                        style={{color: "#5F5", opacity: "0.7"}}
+                        backgroundColor="var(--green2)"
                     >
                         <FontAwesomeIcon icon={faCheck} />
-                    </BlankButton>
-                    <BlankButton
+                    </RoundButton>
+                    <RoundButton
                         onClick={handleDelete}
                         aria-label="Delete"
-                        style={{color: "red", opacity: "0.7"}}
+                        backgroundColor="var(--red2)"
                     >
                         <FontAwesomeIcon icon={faTrash} />
-                    </BlankButton>
+                    </RoundButton>
                 </div>
             </Td>
             {highlighted?.agenda.dates
