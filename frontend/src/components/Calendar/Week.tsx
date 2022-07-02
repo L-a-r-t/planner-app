@@ -21,7 +21,7 @@ function Week() {
         const _week = getFullWeek(_monday);
         setWeek(_week);
         setAgendasFromProps(agendas);
-    }, [agendas, offset])
+    }, [agendas, offset]) // eslint-disable-line
 
     const getFullWeek = (monday:Date) => {
         const _week = [] as Date[];
