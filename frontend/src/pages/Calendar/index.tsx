@@ -15,6 +15,7 @@ import { faLink, faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "components/Buttons";
 import Footer from "components/Footer";
 import Loader from "components/Loader";
+import { showCorner } from "redux/reducers/modal";
 
 function Calendar() {
     const params = useParams();
@@ -71,7 +72,10 @@ function Calendar() {
                 <div>
                     <CalendarHeader>                        
                         <HeadingWrapper
-                            onClick={() => navigator.clipboard.writeText(window.location.toString())}
+                            onClick={() => {
+                                navigator.clipboard.writeText(window.location.toString())
+                                dispatch(showCorner({isError: false, message: "Link copied to clipboard!"}))
+                            }}
                         >
                             <h1>{metadata?.name} <FontAwesomeIcon icon={faLink} /></h1>
                         </HeadingWrapper>
