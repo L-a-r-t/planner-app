@@ -1,0 +1,15 @@
+{
+  "name": "planner-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+  },
+  "keywords": [],
+  "author": "Théo Lartigau",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.2.2"
+  }
+}
