@@ -46,7 +46,7 @@ function Home() {
                     <Label htmlFor="name">Calendar name</Label>
                     <TextInput 
                         name="name" 
-                        placeholder="Summer vacations"
+                        placeholder="ie: 'Summer vacations'"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                         value={name}
                         required 
