@@ -58,12 +58,12 @@ export function WeekRow({agenda, index}: WeekRowProps) {
             input.current?.focus();
             setInputValue(highlighted.agenda.owner ?? '');
         }
-    }, [highlighted?.row, index])
+    }, [highlighted?.row, index]) // eslint-disable-line
 
     useEffect(() => {
         if (highlighted?.row === index && highlighted?.agenda.dates[offset * 7] === undefined) dispatch(pushhighlight())
         else if (agenda?.dates[offset * 7] === undefined) dispatch(push({row: index}))
-    }, [offset])
+    }, [offset]) // eslint-disable-line
 
     return (
         <tr 
@@ -169,7 +169,7 @@ export function NewWeekRow({index}: WeekRowProps) {
 
     useEffect(() => {
         if (highlighted?.row === index && highlighted?.agenda.dates[offset * 7] === undefined) dispatch(pushhighlight())
-    }, [offset])
+    }, [offset]) // eslint-disable-line
 
     return (
         <NewRowTr 

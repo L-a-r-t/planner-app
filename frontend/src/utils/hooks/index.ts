@@ -23,7 +23,7 @@ export const useAPIOnLoad = <T>({method, url, data}: hooks.UseAPIParams) : hooks
         .finally(() => {
             setLoading(false);
         })  
-    }, [])
+    }, []) // eslint-disable-line
 
     return [loading, error, resData];
 }

@@ -24,7 +24,7 @@ function CornerModal() {
                 dispatch(hideCorner())
             }, 1000)
         }, 2000)
-    }, [sharedState.isShowing])
+    }, [sharedState.isShowing]) // eslint-disable-line
 
     return sharedState.isShowing ? ReactDOM.createPortal(
         <Wrapper 

@@ -35,7 +35,7 @@ function Calendar() {
         dispatch(set({name, description}));
         dispatch(init({agendas}));
         document.title = name;
-    }, [data])
+    }, [data]) // eslint-disable-line
 
     return (
     <CenterWrapper 
