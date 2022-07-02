@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // cors, this is from a freecodecamp boilerplate
 const enableCORS = (req: Request, res:Response, next:NextFunction) => {
     if (!process.env.DISABLE_XORIGIN) {
-        const allowedOrigins = ["http://localhost:3000"];
+        const allowedOrigins = ["http://localhost:3000", "https://dispo-planner.herokuapp.com/"];
         const origin = req.headers.origin ?? '';
         if (!process.env.XORIGIN_RESTRICT || allowedOrigins.indexOf(origin) > -1) {
             res.set({
