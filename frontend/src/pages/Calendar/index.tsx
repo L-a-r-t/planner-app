@@ -16,6 +16,7 @@ import Button from "components/Buttons";
 import Footer from "components/Footer";
 import Loader from "components/Loader";
 import { showCorner } from "redux/reducers/modal";
+import Tutorial from "components/Tutorial";
 
 function Calendar() {
     const params = useParams();
@@ -70,6 +71,7 @@ function Calendar() {
               </React.Fragment>
             : (
                 <div>
+                    <Tutorial />
                     <CalendarHeader>                        
                         <HeadingWrapper
                             onClick={() => {

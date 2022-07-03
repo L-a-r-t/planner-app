@@ -9,7 +9,7 @@ import { showCorner } from "redux/reducers/modal";
 import { useAPI } from "utils/hooks";
 import { RoundButton } from "components/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPlus, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export function WeekRow({agenda, index}: WeekRowProps) {
     const input = useRef<HTMLInputElement>(null);
@@ -227,9 +227,7 @@ export function NewWeekRow({index}: WeekRowProps) {
     // WHEN NOT FOCUSED
             : <>
             <td>
-                <p>
-                    Add person
-                </p>
+                <FontAwesomeIcon icon={faPlus} />
             </td>
             {Array.apply(null, Array(7)).map((val, index) => (
                 <td key={"newrow" + index} />
