@@ -40,7 +40,7 @@ function CalendarNav() {
             }
             <ResetButton
                 onClick={() => dispatch(reset())}
-            > Today
+            >Today
             </ResetButton>
             <NavButton
                 onClick={() => dispatch(increment())}
