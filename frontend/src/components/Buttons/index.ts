@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+const Button = styled.button<ButtonProps>`
     border: none;
     background-color: var(--main-color);
     color: white;
-    border-radius: 1rem;
-    padding: 0.7rem 1.2rem;
+    border-radius: ${props => props.big ? "1.3rem" : "1rem"};
+    padding: ${props => props.big ? "1rem 1.5rem" : "0.7rem 1.2rem"};
+    font-size: ${props => props.big ? "1.3rem" : "1rem"};
     font-weight: bold;
     &:hover {
         cursor: pointer;
@@ -47,4 +48,8 @@ export default Button
 
 interface RoundButtonProps {
     backgroundColor: string
+}
+
+interface ButtonProps {
+    big?: boolean
 }
