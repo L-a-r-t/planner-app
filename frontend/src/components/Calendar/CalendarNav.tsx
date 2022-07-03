@@ -22,7 +22,6 @@ const NavButton = styled.button`
 `
 
 const ResetButton = styled(NavButton)`
-    width: 4em;
     text-align: center;
     border: none;
 `
