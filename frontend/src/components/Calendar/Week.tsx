@@ -52,7 +52,10 @@ function Week() {
                     <tr>
                         <Th />
                         {week?.map((day) => (
-                            <Th key={day.toDateString()}>
+                            <Th 
+                                key={day.toDateString()}
+                                style={{color: day.toDateString() === new Date().toDateString() ? "var(--main-color)" : "inherit"}}
+                            >
                                 {day.toDateString().slice(0, 4)}
                                 <br/>
                                 {day.toDateString().slice(4, 10)}
