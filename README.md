@@ -1,5 +1,5 @@
 # planner-app
-<img width="455" alt="Capture d’écran 2022-07-04 014625" src="https://user-images.githubusercontent.com/104721818/177063036-719343e3-b679-429d-9d21-932cf03fddbe.png"> <img width="450" alt="Capture d’écran 2022-07-04 015258" src="https://user-images.githubusercontent.com/104721818/177063044-53eef8bd-caa6-427e-b6ea-088d6924db14.png">
+<img width="600" alt="Capture d’écran 2022-07-04 014625" src="https://user-images.githubusercontent.com/104721818/177063036-719343e3-b679-429d-9d21-932cf03fddbe.png"> <img width="600" alt="Capture d’écran 2022-07-04 015258" src="https://user-images.githubusercontent.com/104721818/177063044-53eef8bd-caa6-427e-b6ea-088d6924db14.png">
 ## Summary
 This [planner app](https://dispo-planner.netlify.app/) is a way to make calendars for sharing availabilities with friends, famility and such. It is a project I made for my personal portfolio using the MERN (MongoDB, Express, React, NodeJS) stack and Typescript. The front end is a Single Page Application and the back end is a simple REST api. As of today, this app does not use any kind of authentication, anyone with a calendar's link can modify it.
 ### Choosing the stack
