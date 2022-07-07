@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAPIOnLoad } from "utils/hooks";
 import { apis } from "utils/models";
 import { CenterWrapper } from "components/Wrappers";
-import Week from "components/Calendar/Week";
-import CalendarNav from "components/Calendar/CalendarNav";
+import Week from "features/Calendar/Week";
+import CalendarNav from "features/Calendar/CalendarNav";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { set } from "redux/reducers/meta"
@@ -16,7 +16,7 @@ import Button from "components/Buttons";
 import Footer from "components/Footer";
 import Loader from "components/Loader";
 import { showCorner } from "redux/reducers/modal";
-import Tutorial from "components/Tutorial";
+import Tutorial from "features/Tutorial";
 
 function Calendar() {
     const params = useParams();
