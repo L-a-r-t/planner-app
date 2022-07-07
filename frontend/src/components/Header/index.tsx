@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import {LoginButton, LogoutButton} from "components/AuthButtons"
-import Button, { BlankButton } from "components/Buttons"
+import Button from "components/Buttons"
 import DarkMode from "features/DarkMode"
 import React from "react"
 import { FlexWrapper, HeaderWrapper, Heading } from "./styles"
