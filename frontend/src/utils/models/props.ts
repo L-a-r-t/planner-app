@@ -1,8 +1,8 @@
+import { User } from "@auth0/auth0-react"
 import { Agenda } from "."
 
 export interface CalendarProps {
-    agendas?: Agenda[]
-    updateAgenda: (agenda: Agenda, index: number, offset: number, delta: number) => void
+    user?: User
 }
 
 export interface DayCardProps {
@@ -13,6 +13,7 @@ export interface DayCardProps {
 
 export interface WeekRowProps {
     agenda?: Agenda
+    user?: User
     index: number
 }
 
