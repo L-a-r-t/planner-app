@@ -5,8 +5,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { add, highlight, update, push, pushhighlight, resethighlight, erase } from 'redux/reducers/agendas'
-import { showCorner } from "redux/reducers/modal";
-import { useAPI } from "utils/hooks";
+import { useAPI, useCornerModal } from "utils/hooks";
 import { RoundButton } from "components/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +21,7 @@ export function WeekRow({agenda, index}: WeekRowProps) {
     const [deleteAgenda] = useAPI()
     
     const dispatch = useDispatch()
+    const {showCornerModal} = useCornerModal()
 
     const handleSubmit = (e:React.PointerEvent<HTMLButtonElement>) => {
         e.stopPropagation();
@@ -34,9 +34,9 @@ export function WeekRow({agenda, index}: WeekRowProps) {
             }
         }).then(() => {
             dispatch(update({owner: inputValue}))
-            dispatch(showCorner({isError: false, message: "Successfully updated!"}))
+            showCornerModal('Successfully updated!')
         }).catch(err => {
-            dispatch(showCorner({isError: true, message: "Oops! An error occured."}))
+            showCornerModal('Oops! An error occured.', true)
         })
     }
 
@@ -47,9 +47,9 @@ export function WeekRow({agenda, index}: WeekRowProps) {
             url: `/calendar/${window.location.pathname.split('/')[2]}/delete/${highlighted?.row}`
         }).then(() => {
             dispatch(erase())
-            dispatch(showCorner({isError: false, message: "Successfully deleted!"}))
+            showCornerModal('Successfully deleted!')
         }).catch(err => {
-            dispatch(showCorner({isError: true, message: "Oops! An error occured."}))
+            showCornerModal('Oops! An error occured.', true)
         })
     }
     
@@ -145,6 +145,7 @@ export function NewWeekRow({index}: WeekRowProps) {
     const [addAgenda] = useAPI()
 
     const dispatch = useDispatch()
+    const {showCornerModal} = useCornerModal()
 
     const handleSubmit = (e:React.PointerEvent<HTMLButtonElement>) => {
         e.stopPropagation();
@@ -157,9 +158,9 @@ export function NewWeekRow({index}: WeekRowProps) {
         }).then(() => {
             dispatch(add({owner: inputValue}));
             setInputValue('');
-            dispatch(showCorner({isError: false, message: "Successfully added!"}))
+            showCornerModal('Successfully added!')
         }).catch(err => {
-            dispatch(showCorner({isError: true, message: "Oops! An error occured."}))
+            showCornerModal('Oops! An error occured.')
         })
     }
     

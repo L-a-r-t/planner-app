@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAPIOnLoad } from "utils/hooks";
+import { useAPI } from "utils/hooks";
 import { apis } from "utils/models";
 import { CenterWrapper } from "components/Wrappers";
 import Week from "features/Calendar/Week";
@@ -17,15 +17,15 @@ import Footer from "components/Footer";
 import Loader from "components/Loader";
 import { showCorner } from "redux/reducers/modal";
 import Tutorial from "features/Tutorial";
+import { useAuth0 } from "@auth0/auth0-react";
+import Header from "components/Header";
 
 function Calendar() {
     const params = useParams();
     const navigate = useNavigate();
+    const { isLoading, user } = useAuth0();
 
-    const [loading, error, data] = useAPIOnLoad<apis.CalendarData>({
-        method: 'get',
-        url: '/calendar/' + params.id
-    });
+    const [getCalendar, loading, error, data] = useAPI<apis.CalendarData>();
 
     const metadata = useSelector((state: RootState) => state.metadata)
 
@@ -39,7 +39,20 @@ function Calendar() {
         document.title = name;
     }, [data]) // eslint-disable-line
 
+    useEffect(() => {
+        if (isLoading) return
+        getCalendar({
+            method: 'get',
+            url: `calendar/${params.id}`,
+            data: {
+                email: user?.email
+            }
+        })
+    }, [isLoading]) // eslint-disable-line
+
     return (
+    <React.Fragment>
+        <Header />
     <CenterWrapper 
         padding="1rem" 
         isFullScreen
@@ -95,7 +108,8 @@ function Calendar() {
                 </div>
             )
         }
-    </CenterWrapper>)
-}
+    </CenterWrapper>
+    </React.Fragment>
+)}
 
 export default Calendar;

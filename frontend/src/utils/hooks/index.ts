@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { hooks } from 'utils/models';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { showCorner, hideCorner } from 'redux/reducers/modal'
 
 export const useAPIOnLoad = <T>({method, url, data}: hooks.UseAPIParams) : hooks.UseAPIOnLoadReturns<T> => {
     const [loading, setLoading] = useState(false);
@@ -28,8 +30,10 @@ export const useAPIOnLoad = <T>({method, url, data}: hooks.UseAPIParams) : hooks
     return [loading, error, resData];
 }
 
-export const useAPI = () : hooks.UseAPIReturns => {
+export const useAPI = <T>() : hooks.UseAPIReturns<T> => {
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<Error>();
+    const [resData, setData] = useState<T>();
 
     const invoke = async ({method, url, data}: hooks.UseAPIParams) => {
         try {
@@ -39,15 +43,18 @@ export const useAPI = () : hooks.UseAPIReturns => {
                 url,
                 data
             })
-            setLoading(false);
-            return res.data;
+            setData(res.data);
+            return res.data
         }
         catch (err) {
-            if (err instanceof Error) throw err
+            if (err instanceof Error) setError(err)
+        }
+        finally {
+            setLoading(false);
         }
     }
 
-    return [invoke, loading];
+    return [invoke, loading, error, resData];
 }
 
 export const useTutorial = (tutorialSteps: number): hooks.UseTutorialReturns => {
@@ -70,4 +77,13 @@ export const useTutorial = (tutorialSteps: number): hooks.UseTutorialReturns => 
     }
 
     return [isFirstVisit, step, next]
+}
+
+export const useCornerModal = () => {
+    const dispatch = useDispatch()
+
+    const showCornerModal = (message: string, isError?: boolean) => {dispatch(showCorner({message, isError: isError ?? false}))}
+    const hideCornerModal = () => {dispatch(hideCorner())}
+
+    return {showCornerModal, hideCornerModal}
 }

@@ -4,6 +4,6 @@ export interface UseAPIParams {
     data?: object
 }
 
-export type UseAPIReturns = [({method, url, data}: UseAPIParams) => Promise<any>, boolean]
-export type UseAPIOnLoadReturns<T> = [boolean, Error | undefined, T?]
+export type UseAPIReturns<T> = [({method, url, data}: UseAPIParams) => Promise<any>, boolean, Error?, T?]
+export type UseAPIOnLoadReturns<T> = [boolean, Error?, T?]
 export type UseTutorialReturns = [boolean, number, () => void]
