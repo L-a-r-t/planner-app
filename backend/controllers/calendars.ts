@@ -1,15 +1,18 @@
 import { RequestHandler, Request, Response, NextFunction } from "express"
 import { isValidObjectId } from "mongoose";
 import Calendar from '../models/calendar'
+import User from "../models/dispoUser";
 
 export const create: RequestHandler = (async (req: Request, res: Response) => {
     try {
-        const {name, description} = req.body;
-        console.log(description);
+        const {name, description, userid} = req.body;
+        const user = await User.findOne({ userid })
         const newCalendar = await Calendar.create({
             name,
             description,
             lastViewed: new Date(),
+            owner: user?._id,
+            allowed: [user?.email]
         })
         res.json({redirect: './calendar/' + newCalendar._id})    
     }

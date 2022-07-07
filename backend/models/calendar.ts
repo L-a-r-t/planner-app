@@ -18,6 +18,19 @@ const calendarSchema = new mongoose.Schema({
     lastViewed: {
         type: Date,
         required: true,
+    },
+    access: [{
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: true,
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, 'Please fill a valid email address']
+    }],
+    owner: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: "CalendarUser"
     }
 })
 
