@@ -1,19 +1,28 @@
 import { RequestHandler, Request, Response, NextFunction } from "express"
-import { isValidObjectId } from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import Calendar from '../models/calendar'
 import User from "../models/dispoUser";
+import checkUserCalendar from "../utils/checkUserCalendar";
 
 export const create: RequestHandler = (async (req: Request, res: Response) => {
     try {
-        const {name, description, userid} = req.body;
-        const user = await User.findOne({ userid })
+        const {name, description, email, isPublic} = req.body;
+        const user = await User.findOne({ email })
+        if (!user) {
+            throw new Error()
+        }
         const newCalendar = await Calendar.create({
             name,
             description,
             lastViewed: new Date(),
             owner: user?._id,
-            allowed: [user?.email]
+            access: [{email: user?.email}],
+            public: isPublic
         })
+        if (user.calendars) {
+            user.calendars.push(newCalendar._id)
+            await user.save()
+        }
         res.json({redirect: './calendar/' + newCalendar._id})    
     }
     catch (err) {
@@ -25,6 +34,7 @@ export const create: RequestHandler = (async (req: Request, res: Response) => {
 export const get: RequestHandler = (async (req: Request, res: Response) => {
     try {
         const {id} = req.params;
+        const {email} = req.body;
         if (!isValidObjectId(id)) {
             res.status(404).send('not found')
             return
@@ -32,6 +42,11 @@ export const get: RequestHandler = (async (req: Request, res: Response) => {
         const calendar = await Calendar.findById(id);
         if (!calendar) {
             res.status(404).send('not found')
+            return
+        }
+        const match = await checkUserCalendar(calendar, email);
+        if (!match) {
+            res.status(401).send('unauthorized')
             return
         }
         calendar.lastViewed = new Date();

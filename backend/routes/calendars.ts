@@ -4,10 +4,13 @@ const app = express.Router();
 // import controller
 import * as controllers from '../controllers/calendars';
 
-app.get('/:id', controllers.get);
-app.post('/create', controllers.create);
-app.post('/:id/update', controllers.update);
-app.post('/:id/add', controllers.add);
-app.post('/:id/delete/:index', controllers.deleteRow);
+// import middleware
+import {checkJWT, getEmail} from '../middleware'
+
+app.post('/create', checkJWT, getEmail, controllers.create);
+app.post('/:id/update', checkJWT, getEmail, controllers.update);
+app.post('/:id/add', checkJWT, getEmail, controllers.add);
+app.post('/:id/delete/:index', checkJWT, getEmail, controllers.deleteRow);
+app.post('/:id', checkJWT, getEmail, controllers.get);
 
 export default app; 

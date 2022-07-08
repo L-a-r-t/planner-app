@@ -9,7 +9,7 @@ export const enableCORS = (req: Request, res:Response, next:NextFunction) => {
                 "Access-Control-Allow-Origin": origin,
                 "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
                 "Access-Control-Allow-Headers":
-                "Origin, X-Requested-With, Content-Type, Accept",
+                "Origin, X-Requested-With, Content-Type, Accept, Authorization",
             });
         }
     }

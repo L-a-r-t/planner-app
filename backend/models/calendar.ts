@@ -8,6 +8,16 @@ const agendaSchema = new mongoose.Schema({
     dates: Array
 })
 
+const lightEmailSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        required: true,
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, 'Please fill a valid email address']
+    }
+})
+
 const calendarSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -19,14 +29,11 @@ const calendarSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    access: [{
-        type: String,
-        trim: true,
-        lowercase: true,
-        unique: true,
+    public: {
+        type: Boolean,
         required: true,
-        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, 'Please fill a valid email address']
-    }],
+    },
+    access: [lightEmailSchema],
     owner: {
         type: mongoose.Types.ObjectId,
         required: true,
