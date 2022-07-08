@@ -27,6 +27,7 @@ export const useAuthAPI = <T>() : hooks.UseAPIReturns<T> => {
         }
         catch (err) {
             if (err instanceof Error) setError(err)
+            throw new Error()
         }
         finally {
             setLoading(false);

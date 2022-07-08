@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { add, highlight, update, push, pushhighlight, resethighlight, erase } from 'redux/reducers/agendas'
-import { useAPI, useCornerModal } from "utils/hooks";
+import { useAuthAPI, useCornerModal } from "utils/hooks";
 import { RoundButton } from "components/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -17,8 +17,8 @@ export function WeekRow({agenda, index}: WeekRowProps) {
     const offset = useSelector((state: RootState) => state.offset.value)
     const highlighted = useSelector((state: RootState) => state.agendas.highlighted)
 
-    const [updateAgenda] = useAPI()
-    const [deleteAgenda] = useAPI()
+    const [updateAgenda] = useAuthAPI()
+    const [deleteAgenda] = useAuthAPI()
     
     const dispatch = useDispatch()
     const {showCornerModal} = useCornerModal()
@@ -142,7 +142,7 @@ export function NewWeekRow({index}: WeekRowProps) {
     const offset = useSelector((state: RootState) => state.offset.value)
     const highlighted = useSelector((state: RootState) => state.agendas.highlighted)
 
-    const [addAgenda] = useAPI()
+    const [addAgenda] = useAuthAPI()
 
     const dispatch = useDispatch()
     const {showCornerModal} = useCornerModal()
@@ -160,7 +160,7 @@ export function NewWeekRow({index}: WeekRowProps) {
             setInputValue('');
             showCornerModal('Successfully added!')
         }).catch(err => {
-            showCornerModal('Oops! An error occured.')
+            showCornerModal('Oops! An error occured.', true)
         })
     }
     
