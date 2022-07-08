@@ -1,6 +1,6 @@
 import { CenterWrapper, CardWrapper } from "components/Wrappers";
-import React, { useState } from "react";
-import { useAPI, useCornerModal } from "utils/hooks";
+import React, { useRef, useState } from "react";
+import { useAuthAPI, useCornerModal } from "utils/hooks";
 import { useNavigate } from "react-router-dom";
 import { Form, Label, TextInput } from "./styles";
 import { SubmitButton } from "components/Buttons";
@@ -11,13 +11,14 @@ import { LoginButton } from "components/AuthButtons";
 
 function Home() {
     const [name, setName] = useState('');
+    const isPublic = useRef<HTMLInputElement>(null)
 
-    const [createCalendar] = useAPI();
+    const [createCalendar] = useAuthAPI();
     const navigate = useNavigate();
 
     const {showCornerModal} = useCornerModal()
 
-    const {isAuthenticated, user} = useAuth0();
+    const {isAuthenticated} = useAuth0();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,7 +28,7 @@ function Home() {
             data: {
                 name,
                 description: '',
-                userid: user?.sub
+                isPublic: isPublic.current?.checked
             }
         })
         .then((data) => {
@@ -56,8 +57,17 @@ function Home() {
                             value={name}
                             required 
                         />
+                        <div style={{marginTop: "1rem"}}>
+                            <input 
+                                type="checkbox"
+                                ref={isPublic}
+                                name="isPublic" 
+                                value="yes"
+                                defaultChecked
+                            /> <Label htmlFor="isPublic">Public</Label>
+                        </div>
                         <p>
-                            Once created, you can easily copy and share the link to anyone you want!
+                            Anyone with a public calendar's link can access and modify it. You can always change this option later.
                         </p>
                         {!isAuthenticated && <LoginButton />}
                         {isAuthenticated && <SubmitButton type="submit" value="Create calendar" />}
