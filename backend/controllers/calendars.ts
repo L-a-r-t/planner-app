@@ -45,13 +45,20 @@ export const get: RequestHandler = (async (req: Request, res: Response) => {
             return
         }
         const match = await checkUserCalendar(calendar, email);
-        if (!match) {
+        if (!match[0]) {
             res.status(401).send('unauthorized')
             return
         }
         calendar.lastViewed = new Date();
         await calendar.save();
-        res.json(calendar);
+        console.log(calendar)
+        res.json({
+            name: calendar.name,
+            description: calendar.description,
+            agendas: calendar.agendas,
+            access: calendar.access,
+            owner: match[1]
+        });
     }
     catch (err) {
         console.error(err)
