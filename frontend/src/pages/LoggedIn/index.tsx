@@ -1,12 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAPI, useCornerModal } from "utils/hooks"
+import { useAuthAPI, useCornerModal } from "utils/hooks"
 
 function LoggedIn() {
     const navigate = useNavigate()
     const {isLoading, isAuthenticated, user} = useAuth0()
-    const [callAPI] = useAPI()
+    const [callAPI] = useAuthAPI()
     const {showCornerModal} = useCornerModal()
 
     useEffect(() => {
@@ -19,8 +19,6 @@ function LoggedIn() {
             method: 'post',
             url: '/user/login',
             data: {
-                userid: user?.sub,
-                email: user?.email,
                 verified: user?.email_verified
             }
         })
