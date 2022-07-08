@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAPI } from "utils/hooks";
+import { useAuthAPI } from "utils/hooks";
 import { apis } from "utils/models";
 import { CenterWrapper } from "components/Wrappers";
 import Week from "features/Calendar/Week";
@@ -25,7 +25,8 @@ function Calendar() {
     const navigate = useNavigate();
     const { isLoading, user } = useAuth0();
 
-    const [getCalendar, loading, error, data] = useAPI<apis.CalendarData>();
+    const [getCalendar, loading, error, data] = useAuthAPI<apis.CalendarData>();
+    const [errorMessage, setErrorMessage] = useState<ReactElement<any, any>>();
 
     const metadata = useSelector((state: RootState) => state.metadata)
 
@@ -42,13 +43,36 @@ function Calendar() {
     useEffect(() => {
         if (isLoading) return
         getCalendar({
-            method: 'get',
+            method: 'post',
             url: `calendar/${params.id}`,
             data: {
                 email: user?.email
             }
         })
     }, [isLoading]) // eslint-disable-line
+
+    useEffect(() => {
+        if (!error) return
+        if (error.message.includes('404')) {
+            setErrorMessage(
+            <div>
+                <h1>This agenda doesn't exist</h1>
+                <p>If it hasn't been viewed for 7 days in a row, it has been automatically deleted. If that's not the case, make sure the link is correct.</p>
+            </div>)
+        } else if (error.message.includes('401')) {
+            setErrorMessage(
+            <div>
+                <h1>You don't have access to this agenda</h1>
+                <p>You should ask access to the owner of the agenda.</p>
+            </div>)
+        } else {
+            setErrorMessage(
+            <div>
+                <h1>Oops, an error occured!</h1>
+                <p>That's on our side. We'll investigate the issue ASAP, sorry for the inconvenience!</p>
+            </div>)
+        }
+    }, [error])
 
     return (
     <React.Fragment>
@@ -64,19 +88,7 @@ function Calendar() {
             </CenterWrapper>
             : error
             ? <React.Fragment>
-                {error.message.includes('404') 
-                ?
-                <div>
-                    <h1>This agenda doesn't exist</h1>
-                    <p>If it hasn't been viewed for 7 days in a row, it has been automatically deleted. If that's not the case, make sure the link is correct.</p>
-
-                </div>
-                : 
-                <div>
-                    <h1>Oops, an error occured!</h1>
-                    <p>That's on our side. We'll investigate the issue ASAP, sorry for the inconvenience!</p>
-                </div>
-                }
+                {errorMessage}
                 <Button
                     onClick={() => navigate('/')}
                 > <FontAwesomeIcon icon={faStar} /> Create a new calendar 
