@@ -15,7 +15,7 @@ import LoggedIn from 'pages/LoggedIn'
 
 // in dev use 'http://localhost:3001/api'
 // in prod use 'https://dispo-planner.herokuapp.com/api'
-axios.defaults.baseURL = 'http://localhost:3002/api'
+axios.defaults.baseURL = 'https://dispo-planner.herokuapp.com/api'
 
 const darkmodeCookie = localStorage.getItem('darkmode')
 if (darkmodeCookie) {
