@@ -12,6 +12,7 @@ import CornerModal from 'features/CornerModal'
 import axios from 'axios'
 import { Auth0Provider } from '@auth0/auth0-react'
 import LoggedIn from 'pages/LoggedIn'
+import MyCalendars from 'pages/MyCalendars'
 
 // in dev use 'http://localhost:3001/api'
 // in prod use 'https://dispo-planner.herokuapp.com/api'
@@ -42,6 +43,7 @@ root.render(
           <Route path="/" element={<Home />}/>
           <Route path="/calendar/:id" element={<Protected component={Calendar} />}/>
           <Route path="/loggedin" element={<LoggedIn />}/>
+          <Route path="/mycalendars" element={<Protected component={MyCalendars} />}/>
         </Routes>
       </Router>
       <CornerModal />

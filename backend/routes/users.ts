@@ -8,5 +8,6 @@ import * as controllers from '../controllers/users'
 import {checkJWT, getEmail} from '../middleware'
 
 app.post('/login', checkJWT, getEmail, controllers.login)
+app.post('/calendars', checkJWT, getEmail, controllers.getCalendars)
 
 export default app

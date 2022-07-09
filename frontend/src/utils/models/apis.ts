@@ -7,3 +7,11 @@ export interface CalendarData {
     access: {email: string}[]
     owner: boolean
 }
+
+export type CalendarList = {
+    id: string
+    name: string
+    description: string
+    public: boolean
+    owner: boolean
+}[]
