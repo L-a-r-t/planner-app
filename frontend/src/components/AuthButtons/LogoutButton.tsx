@@ -8,6 +8,7 @@ export function LogoutButton() {
         <Button
             onClick={() => logout({returnTo: window.location.origin})}
             transparent
+            style={{color: 'var(--txt-color)'}}
         >Log Out
         </Button>
     )
