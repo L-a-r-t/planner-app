@@ -51,7 +51,6 @@ export const get: RequestHandler = (async (req: Request, res: Response) => {
         }
         calendar.lastViewed = new Date();
         await calendar.save();
-        console.log(calendar)
         res.json({
             name: calendar.name,
             description: calendar.description,
