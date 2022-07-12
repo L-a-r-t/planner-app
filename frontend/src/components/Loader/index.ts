@@ -12,6 +12,7 @@ const Loader = styled.div`
     border: 1.5rem solid var(--main-color);
     border-bottom-color: transparent;
     border-radius: 50%;
+    margin: 0 auto;
     animation: ${loadAnimation} 2s linear infinite;
 `
 
