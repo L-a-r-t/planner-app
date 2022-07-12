@@ -58,7 +58,7 @@ function MyCalendars() {
                             <tr>
                                 <td colSpan={3}><Loader /></td>
                             </tr>}
-                            {(calendars) &&
+                            {(calendars) ?
                             calendars.length > 0 
                             ? calendars.map((calendar, calendarIdx) => 
                             <Tr 
@@ -72,7 +72,7 @@ function MyCalendars() {
                             : <tr>
                                 <td colSpan={3}>You don't have any calendars yet.</td>
                               </tr>
-                            }
+                            : null}
                         </tbody>
                     </Table>
                 </CardWrapper>

@@ -48,7 +48,7 @@ export const Th = styled.th`
 
 export const Td = styled.td`
     border-top: 1px solid #AAA;
-    padding: 0;
+    padding: 0 1rem;
     border-collapse: collapse;
     height: 3rem;
     &:first-child {
