@@ -74,7 +74,7 @@ function Home() {
                     </Form>
                 </CardWrapper>
                 <Footer anchorBottom>
-                    <span>An app made by <a href="https://www.linkedin.com/in/th%C3%A9o-lartigau-a07177222/" target="_blank" rel="noreferrer">Théo Lartigau</a> </span>
+                    <span>An app made by <a href="https://www.linkedin.com/in/th%C3%A9o-lartigau-a07177222/" target="_blank" rel="noreferrer" className="underline">Théo Lartigau</a> </span>
                 </Footer>
             </CenterWrapper>
         </React.Fragment>

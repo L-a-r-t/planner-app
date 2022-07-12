@@ -110,7 +110,7 @@ function Calendar() {
                     </CalendarHeader>
                     <Week />
                     <Footer>
-                        <span>An app made by <a href="https://www.linkedin.com/in/th%C3%A9o-lartigau-a07177222/" target="_blank" rel="noreferrer">Théo Lartigau</a> </span>
+                        <span>An app made by <a className="underline" href="https://www.linkedin.com/in/th%C3%A9o-lartigau-a07177222/" target="_blank" rel="noreferrer">Théo Lartigau</a> </span>
                         <Button
                             onClick={() => navigate('/')}
                             style={{marginLeft: "0.5rem"}}
