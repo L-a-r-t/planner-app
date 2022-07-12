@@ -5,8 +5,8 @@ import {LoginButton, LogoutButton} from "components/AuthButtons"
 import Button from "components/Buttons"
 import DarkMode from "features/DarkMode"
 import React from "react"
-import { useNavigate } from "react-router-dom"
 import { FlexWrapper, HeaderWrapper, Heading } from "./styles"
+import { Link } from "react-router-dom"
 
 interface Props {
     fixed?: boolean
@@ -15,24 +15,23 @@ interface Props {
 
 function Header({fixed, inCalendarsPage}: Props) {
 
-    const { isAuthenticated } = useAuth0()
-    const navigate = useNavigate()
+    const { isAuthenticated } = useAuth0()    
 
     return (
         <HeaderWrapper fixed={fixed}>
-            <Heading>dispo.</Heading>
+            <Heading><Link to="/">dispo.</Link></Heading>
             <FlexWrapper>
                 <DarkMode />
                 {isAuthenticated 
                 ? <React.Fragment>
                     <LogoutButton />
                     {inCalendarsPage
-                    ? <Button
-                    onClick={() => navigate('/')}
-                    ><FontAwesomeIcon icon={faStar} /> Create calendar </Button>
-                    : <Button
-                    onClick={() => navigate('/mycalendars')}
-                    >My calendars</Button>}
+                    ? <Button>
+                        <Link to="/"><FontAwesomeIcon icon={faStar} /> Create calendar </Link>
+                      </Button>
+                    : <Button>
+                        <Link to="/mycalendars">My calendars</Link>
+                      </Button>}
                 </React.Fragment>
                 : <LoginButton />
                 }
