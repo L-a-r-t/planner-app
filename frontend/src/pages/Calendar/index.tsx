@@ -43,11 +43,11 @@ function Calendar() {
     useEffect(() => {
         if (isLoading) return
         getCalendar({
-            method: 'post',
+            method: user ? 'post' : 'get',
             url: `calendar/${params.id}`,
-            data: {
+            data: user ? {
                 email: user?.email
-            }
+            } : undefined
         })
     }, [isLoading]) // eslint-disable-line
 

@@ -65,6 +65,38 @@ export const get: RequestHandler = (async (req: Request, res: Response) => {
     }
 })
 
+export const getPublic: RequestHandler = (async (req: Request, res: Response) => {
+    try {
+        const {id} = req.params;
+        if (!isValidObjectId(id)) {
+            res.status(404).send('not found')
+            return
+        }
+        const calendar = await Calendar.findById(id);
+        if (!calendar) {
+            res.status(404).send('not found')
+            return
+        }
+        if (!calendar.public) {
+            res.status(401).send('unauthorized')
+            return
+        }
+        calendar.lastViewed = new Date()
+        await calendar.save()
+        res.json({
+            name: calendar.name,
+            description: calendar.description,
+            agendas: calendar.agendas,
+            access: calendar.access,
+            owner: false
+        })
+    }
+    catch (err) {
+        console.error(err)
+        res.status(500).json({error: err})
+    }
+})
+
 export const update: RequestHandler = (async (req: Request, res: Response) => {
     try {
         const {id} = req.params;

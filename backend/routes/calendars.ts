@@ -12,5 +12,6 @@ app.post('/:id/update', checkJWT, getEmail, controllers.update);
 app.post('/:id/add', checkJWT, getEmail, controllers.add);
 app.post('/:id/delete/:index', checkJWT, getEmail, controllers.deleteRow);
 app.post('/:id', checkJWT, getEmail, controllers.get);
+app.get('/:id', controllers.getPublic)
 
 export default app; 
