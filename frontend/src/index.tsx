@@ -41,7 +41,7 @@ root.render(
       <Router>
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/calendar/:id" element={<Protected component={Calendar} />}/>
+          <Route path="/calendar/:id" element={<Calendar />}/>
           <Route path="/loggedin" element={<LoggedIn />}/>
           <Route path="/mycalendars" element={<Protected component={MyCalendars} />}/>
         </Routes>
